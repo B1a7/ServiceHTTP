@@ -1,0 +1,12 @@
+D:\CODING\HttpService\bin\Debug\net6.0\HttpService.deps.json
+D:\CODING\HttpService\bin\Debug\net6.0\HttpService.dll
+D:\CODING\HttpService\bin\Debug\net6.0\HttpService.pdb
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.csproj.AssemblyReference.cache
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.GeneratedMSBuildEditorConfig.editorconfig
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.AssemblyInfoInputs.cache
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.AssemblyInfo.cs
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.csproj.CoreCompileInputs.cache
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.dll
+D:\CODING\HttpService\obj\Debug\net6.0\refint\HttpService.dll
+D:\CODING\HttpService\obj\Debug\net6.0\HttpService.pdb
+D:\CODING\HttpService\obj\Debug\net6.0\ref\HttpService.dll

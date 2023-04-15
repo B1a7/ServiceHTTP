@@ -1,0 +1,12 @@
+D:\CODING\http_service\HttpService\bin\Release\net6.0\HttpService.deps.json
+D:\CODING\http_service\HttpService\bin\Release\net6.0\HttpService.dll
+D:\CODING\http_service\HttpService\bin\Release\net6.0\HttpService.pdb
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.csproj.AssemblyReference.cache
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.GeneratedMSBuildEditorConfig.editorconfig
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.AssemblyInfoInputs.cache
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.AssemblyInfo.cs
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.csproj.CoreCompileInputs.cache
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.dll
+D:\CODING\http_service\HttpService\obj\Release\net6.0\refint\HttpService.dll
+D:\CODING\http_service\HttpService\obj\Release\net6.0\HttpService.pdb
+D:\CODING\http_service\HttpService\obj\Release\net6.0\ref\HttpService.dll
