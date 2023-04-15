@@ -42,12 +42,28 @@ An example that sends an http request (app will be working in local network. Ulr
     }
 Expected json body for each module:
 
-TangibleModule: { "object": string, "coordinateX": int, "coordinateY": int, "rotationAngle": int }
+TangibleModule: 
+{ 
+    "object": string, 
+    "coordinateX": int, 
+    "coordinateY": int, 
+    "rotationAngle": int
+}
 
-SensorsModule: { "racketDirection": int, // value <0,1> }
+SensorsModule: 
+{ 
+    "racketDirection": int // value <0,1> 
+}
 
-VoiceModule: { "scoreboard": int, "ballVelocity": int }
+VoiceModule: 
+{ 
+    "scoreboard": int, 
+    "ballVelocity": int 
+}
 
-DlKinectModule: { "racketDirection": int, // value <0,1> }
+DlKinectModule: 
+{ 
+    "racketDirection": int // value <0,1> 
+}
 
 To run program and test your comunication you can build it in visual studio by your own (.sln file is located in http_service/HttpService/) or open .exe file in bin/Release/net6.0
