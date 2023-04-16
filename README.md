@@ -4,46 +4,47 @@ Service that supports communication between Unity pong game and control modules
 
 Each module has its own Id which is used to recognize the sender of the http message: VoiceModule = 1, TangibleModule = 2, SensorsModule = 3, DlKinectmodule = 4,
 
-An example that sends an http request (app will be working in local network. Ulr is defined in connection.json which me be in the same directory as .exe file):
+An example how to send an http request (I recommend to use Postman):
 
-    static async Task Main(string[] args)
+using System.Text.Json;
+
+Console.WriteLine("Sending messages...");
+var client = new HttpClient();
+client.BaseAddress = new Uri("http://localhost:5001/");
+
+while (true)
+{
+    Console.WriteLine("Enter message: ");
+    var message = Console.ReadLine();
+
+    // Create a JSON payload
+    var payload = new
     {
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddJsonFile("connection.json")
-            .Build();
-        var url = configuration["url"];
+        id = 1,
+        racketDirection = message,
+    };
+    var json = JsonSerializer.Serialize(payload);
 
-        var service = HttpServiceSingleton.GetInstance();
-        service.InitializeServer(url);
-        PropertyInfo[] properties = service.GetType().GetProperties();
+    var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+    var response = await client.PostAsync("", content);
 
-        Task.Run(async () =>
-        {
-            await service.ServerListenerAsync();
-        });
+    Console.WriteLine($"Response: {response.StatusCode}");
 
-        // Display all values in Console
-        while (true)
-        {
-            foreach (var property in properties)
-            {
-                var module = (ModuleBase)property.GetValue(service);
-                PropertyInfo[] moduleProperties = module.GetType().GetProperties();
-                Console.WriteLine($"{property.Name}:");
-                foreach (PropertyInfo moduleProperty in moduleProperties)
-                {
-                    Console.WriteLine($"  {moduleProperty.Name}: {moduleProperty.GetValue(module)}");
-                }
-            }
+}
 
-            await Task.Delay(500);
-            Console.Clear();
-        }
-    }
+
 Expected json body for each module:
+
+VoiceModule: 
+{ 
+    "id": 1,
+    "scoreboard": int, 
+    "ballVelocity": int 
+}
 
 TangibleModule: 
 { 
+    "id": 2,
     "object": string, 
     "coordinateX": int, 
     "coordinateY": int, 
@@ -52,17 +53,13 @@ TangibleModule:
 
 SensorsModule: 
 { 
+    "id": 3,
     "racketDirection": int // value <0,1> 
-}
-
-VoiceModule: 
-{ 
-    "scoreboard": int, 
-    "ballVelocity": int 
 }
 
 DlKinectModule: 
 { 
+    "id": 4,
     "racketDirection": int // value <0,1> 
 }
 
