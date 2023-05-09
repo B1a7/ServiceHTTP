@@ -63,7 +63,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd ServiceHttp
+  cd ServiceHTTP
 ```
 
 Configure conection.json 
