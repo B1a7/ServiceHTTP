@@ -1,73 +1,87 @@
+
 # HttpService
+
 Service that supports communication between Unity pong game and control modules
 
-Each module has its own Id which is used to recognize the sender of the http message:
-VoiceModule = 1,
-TangibleModule = 2,
-SensorsModule = 3,
-DlKinectmodule = 4,
 
-An example that sends an http request (app will be working in local network. Ulr is defined in connection.json which me be in the same directory as .exe file):
 
-        static async Task Main(string[] args)
-        {
-            IConfiguration configuration = new ConfigurationBuilder()
-                .AddJsonFile("connection.json")
-                .Build();
-            var url = configuration["url"];
+## Messages structure 
 
-            var service = HttpServiceSingleton.GetInstance();
-            service.InitializeServer(url);
-            PropertyInfo[] properties = service.GetType().GetProperties();
+Each module has its own Id which is used to recognize the sender of the http message:   
 
-            Task.Run(async () =>
-            {
-                await service.ServerListenerAsync();
-            });
-
-            // Display all values in Console
-            while (true)
-            {
-                foreach (var property in properties)
-                {
-                    var module = (ModuleBase)property.GetValue(service);
-                    PropertyInfo[] moduleProperties = module.GetType().GetProperties();
-                    Console.WriteLine($"{property.Name}:");
-                    foreach (PropertyInfo moduleProperty in moduleProperties)
-                    {
-                        Console.WriteLine($"  {moduleProperty.Name}: {moduleProperty.GetValue(module)}");
-                    }
-                }
-
-                await Task.Delay(500);
-                Console.Clear();
-            }
-        }
+- VoiceModule = 1
+- TangibleModule = 2
+- SensorsModule = 3
+- DlKinectmodule = 4
 
 Expected json body for each module:
 
-TangibleModule:
-    {
-        "object": string,
-        "coordinateX": int,
-        "coordinateY": int,
-        "rotationAngle": int
-    }
+- VoiceModule: 
+```json
+{ 
+    "id": int, 
+    "scoreboard": int, 
+    "ballVelocity": int 
+}
+```
 
-SensorsModule:
-    {
-        "racketDirection": int,  // value <0,1>
-    }
-   
-VoiceModule:
-    {
-        "scoreboard": int,
-        "ballVelocity": int
-    }
-    
-DlKinectModule:
-    {
-        "racketDirection": int,  // value <0,1>
-    }
-    
-To run program and test your comunication you can build it in visual studio by your own (.sln file is located in http_service/HttpService/) or open .exe file in bin/Release/net6.0
+- TangibleModule: 
+```json
+{ 
+    "id": int, 
+    "object": string, 
+    "coordinateX": int, 
+    "coordinateY": int, 
+    "rotationAngle": int 
+}
+```
+
+- SensorsModule: 
+```json
+{ 
+    "id": 3, 
+    "racketDirection": int // value <0,1> 
+}
+```
+
+- DlKinectModule: 
+```json
+{ 
+    "id": 4, 
+    "racketDirection": int // value <0,1> 
+}
+```
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/B1a7/ServiceHTTP.git
+```
+
+Go to the project directory
+
+```bash
+  cd ServiceHttp
+```
+
+Configure conection.json 
+
+```json
+{
+  "url": "http://localhost:5001/"
+}
+```
+
+Start the program - open .exe file in bin/Release/net6.0
+
+Send messages
+
+## Tech Stack
+
+- **.NET 6**
+## Nuget packages
+
+- **System.Text.Json** v7.0.2
+
