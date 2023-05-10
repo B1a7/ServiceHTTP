@@ -1,66 +1,84 @@
-#HttpService
+# HttpService
 
 Service that supports communication between Unity pong game and control modules
 
-Each module has its own Id which is used to recognize the sender of the http message: VoiceModule = 1, TangibleModule = 2, SensorsModule = 3, DlKinectmodule = 4,
+## Messages structure 
 
-An example how to send an http request (I recommend to use Postman):
+Each module has its own Id which is used to recognize the sender of the http message:   
 
-using System.Text.Json;
-
-Console.WriteLine("Sending messages...");
-var client = new HttpClient();
-client.BaseAddress = new Uri("http://localhost:5001/");
-
-while (true)
-{
-    Console.WriteLine("Enter message: ");
-    var message = Console.ReadLine();
-
-    // Create a JSON payload
-    var payload = new
-    {
-        id = 1,
-        racketDirection = message,
-    };
-    var json = JsonSerializer.Serialize(payload);
-
-    var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-    var response = await client.PostAsync("", content);
-
-    Console.WriteLine($"Response: {response.StatusCode}");
-
-}
-
+- VoiceModule = 1
+- TangibleModule = 2
+- SensorsModule = 3
+- DlKinectmodule = 4
 
 Expected json body for each module:
 
-VoiceModule: 
+- VoiceModule: 
+```json
 { 
-    "id": 1,
+    "id": int, 
     "scoreboard": int, 
     "ballVelocity": int 
 }
+```
 
-TangibleModule: 
+- TangibleModule: 
+```json
 { 
-    "id": 2,
+    "id": int, 
     "object": string, 
     "coordinateX": int, 
     "coordinateY": int, 
-    "rotationAngle": int
+    "rotationAngle": int 
 }
+```
 
-SensorsModule: 
+- SensorsModule: 
+```json
 { 
-    "id": 3,
+    "id": 3, 
     "racketDirection": int // value <0,1> 
 }
+```
 
-DlKinectModule: 
+- DlKinectModule: 
+```json
 { 
-    "id": 4,
+    "id": 4, 
     "racketDirection": int // value <0,1> 
 }
+```
 
-To run program and test your comunication you can build it in visual studio by your own (.sln file is located in http_service/HttpService/) or open .exe file in bin/Release/net6.0
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/B1a7/ServiceHTTP.git
+```
+
+Go to the project directory
+
+```bash
+  cd ServiceHttp
+```
+
+Configure conection.json 
+
+```json
+{
+  "url": "http://localhost:5001/"
+}
+```
+
+Start the program - open .exe file in bin/Release/net6.0
+
+Send messages
+
+## Tech Stack
+
+- **.NET 6**
+## Nuget packages
+
+- **System.Text.Json** v7.0.2
+
